@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "Phishing Box",
+  "description": "Phishing analysis extension",
+  "version": "1.1",
+  "icons": {
+    "128": "Phishing_Box.png"
+  },
+  "action": {
+    "default_popup": "input.html",  
+    "default_icon": {
+      "16": "Phishing_Box.png",
+      "48": "Phishing_Box.png",
+      "128": "Phishing_Box.png"
+    }
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage" 
+  ]  
+}
