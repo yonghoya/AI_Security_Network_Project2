@@ -7,5 +7,6 @@ const detailURL = window.location.href;
 (async () => {
   const response = await chrome.runtime.sendMessage({ action: 'checkURL', url: detailURL });
   // do something with response here, not outside the function
+  console.log("134")
   console.log(response)
 })();
