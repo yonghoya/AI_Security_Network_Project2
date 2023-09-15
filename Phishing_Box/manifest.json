@@ -14,9 +14,14 @@
       "128": "Phishing_Box.png"
     }
   },
+  "content_scripts": [{
+	  "matches": ["https://*/*"],
+	  "js": ["content_scripts.js"]
+  }
+  ],
   "permissions": [
     "activeTab",
     "tabs",
     "storage" 
-  ]  
+  ]
 }
