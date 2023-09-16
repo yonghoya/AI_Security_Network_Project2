@@ -11,6 +11,9 @@ chrome.runtime.onInstalled.addListener(({ reason, details }) => {
     console.log('Extension updated!');
   }
 });
+chrome.storage.local.clear().then(
+  ()=>{//cleared
+});
 
 // 데이터 캐싱 및 저장 (올바른 key와 value 사용)
 chrome.storage.local.set({ myKey: 'myValue' }, function() {
@@ -95,4 +98,4 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   }
 });
 
-// 다른 코드 및 기능을 추가할 수 있습니다.
+

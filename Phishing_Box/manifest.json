@@ -7,7 +7,7 @@
     "128": "Phishing_Box.png"
   },
   "action": {
-    "default_popup": "input.html",  
+    "default_popup": "popup.html",
     "default_icon": {
       "16": "Phishing_Box.png",
       "48": "Phishing_Box.png",
@@ -17,6 +17,17 @@
   "permissions": [
     "activeTab",
     "tabs",
-    "storage" 
-  ]  
+    "storage",
+    "notifications"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*/*", "http://*/*"],
+      "js": ["content_scripts.js"]
+    }
+  ]
 }
+
