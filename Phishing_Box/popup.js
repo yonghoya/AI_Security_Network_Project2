@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', function() {
       urlElement.textContent = urlToCheck;
     }
     
-    // 여기에서 URL 정보를 활용하여 추가적인 작업을 수행할 수 있습니다.
+
   });
   
+
+  //1919
