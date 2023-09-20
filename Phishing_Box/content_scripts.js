@@ -1,6 +1,3 @@
-var element = document.querySelector('div.feedmain');
-element.parentElement.removeChild(element);
-
 // 현재 페이지 URL 가져오기
 const currentURL = window.location.href;
 

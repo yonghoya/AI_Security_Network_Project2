@@ -4,14 +4,14 @@
   "description": "Phishing analysis extension",
   "version": "1.1",
   "icons": {
-    "128": "Phishing_Box.png"
+    "128": "phishing_box.png"
   },
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
-      "16": "Phishing_Box.png",
-      "48": "Phishing_Box.png",
-      "128": "Phishing_Box.png"
+      "16": "phishing_box.png",
+      "48": "phishing_box.png",
+      "128": "phishing_box.png"
     }
   },
   "permissions": [
