@@ -18,36 +18,43 @@ chrome.storage.local.get('myKey', function(result) {
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   if (request.action === 'checkURL') {
     const urlToCheck = request.url;
-    chrome.storage.local.get(urlToCheck)
+    const rooturl = request.rootURL;
+    chrome.storage.local.get(rooturl)
       .then((result) => {
         if(Object.keys(result).length != 0){
           console.log("have data")
+          chrome.notifications.create("phishingbox_noti", {type: "basic",title: urlToCheck, message: result.rooturl, iconUrl:"phishing_box.png"})
+          .then(setTimeout(()=> chrome.notifications.clear("phishingbox_noti"), 1500))
           sendResponse({results: result});
       }else{
         console.log("new data")
         // Django 웹 애플리케이션에 데이터 전송
-        /*fetch('https://your-django-app-url.com/api/endpoint', {
+        fetch('http://ec2-3-35-11-6.ap-northeast-2.compute.amazonaws.com/', {
           method: 'POST',
-          body: JSON.stringify(data),
+          body: JSON.stringify({url:urlToCheck}),
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            Accept: 'application / json',
           }
         })
           .then((response) => response.json())
           .then((result) => {
             // 결과를 캐시에 저장
-            chrome.storage.local.set({urlToCheck: result});
+            chrome.storage.local.set({rooturl: result.results});
             // 처리된 결과를 content scripts로 반환
-            sendResponse({results: result});
+            chrome.notifications.create("phishingbox_noti", {type: "basic",title: urlToCheck, message: result.results, iconUrl:"phishing_box.png"})
+            .then(setTimeout(()=> chrome.notifications.clear("phishingbox_noti"), 1500))
+            sendResponse({results: result.results});
           })
           .catch((error) => {
-            console.error('데이터를 가져오는 중 오류 발생:', error);
-            sendResponse({results: "ERROR"});
-          });*/
-      };})
-      .then(chrome.notifications.create("phishingbox_noti", {type: "basic",title: urlToCheck, message: "CLEAN", iconUrl:"phishing_box.png"}))
-      .then(setTimeout(()=> chrome.notifications.clear("phishingbox_noti"), 1500))
-      .catch((error) => {sendResponse({results: "CLEAN"});});
+            console.log('데이터를 가져오는 중 오류 발생:', error);
+          chrome.notifications.create("phishingbox_noti", {type: "basic",title: urlToCheck, message: error.message, iconUrl:"phishing_box.png"})
+          .then(setTimeout(()=> chrome.notifications.clear("phishingbox_noti"), 5500))
+            sendResponse({results: "SERVER ERROR"});
+            });
+      };
+    })
+      .catch((error) => {sendResponse({results: error.message});});
     // 응답을 보냄
     setTimeout(() => sendResponse({ shite: "q123" }), 500);
   };
