@@ -29,7 +29,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
       }else{
         console.log("new data")
         // Django 웹 애플리케이션에 데이터 전송
-        fetch('http://ec2-3-35-11-6.ap-northeast-2.compute.amazonaws.com/', {
+        fetch('http://15.164.49.80:8000/predict', {
           method: 'POST',
           body: JSON.stringify({url:urlToCheck}),
           headers: {
@@ -40,11 +40,11 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
           .then((response) => response.json())
           .then((result) => {
             // 결과를 캐시에 저장
-            chrome.storage.local.set({rooturl: result.results});
+            chrome.storage.local.set({rooturl: result.predict_result});
             // 처리된 결과를 content scripts로 반환
-            chrome.notifications.create("phishingbox_noti", {type: "basic",title: urlToCheck, message: result.results, iconUrl:"phishing_box.png"})
+            chrome.notifications.create("phishingbox_noti", {type: "basic",title: urlToCheck, message: result.predict_result, iconUrl:"phishing_box.png"})
             .then(setTimeout(()=> chrome.notifications.clear("phishingbox_noti"), 1500))
-            sendResponse({results: result.results});
+            sendResponse({results: result.predict_result});
           })
           .catch((error) => {
             console.log('데이터를 가져오는 중 오류 발생:', error);
