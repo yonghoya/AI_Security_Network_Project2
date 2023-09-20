@@ -131,7 +131,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     const urlToCheck = request.url;
 
     // 팝업 페이지를 열고 URL 정보를 전달
-    const popupViews = chrome.extension.getViews({ type: "popup" });
+    const popupViews = chrome.runtime.getViews({ type: "popup" });
     if (popupViews.length > 0) {
       popupViews[0].urlToCheck = urlToCheck;
       
