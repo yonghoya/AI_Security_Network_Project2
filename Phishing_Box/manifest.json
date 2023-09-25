@@ -9,16 +9,25 @@
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
-      "16": "phishing_box.png",
-      "48": "phishing_box.png",
-      "128": "phishing_box.png"
+      "16": "red.png",
+      "48": "red.png",
+      "128": "red.png"
+    },
+    "red_icon": {
+      "16": "red.png",
+      "48": "red.png",
+      "128": "red.png"
+    },
+    "green_icon": {
+      "16": "green.png",
+      "48": "green.png",
+      "128": "green.png"
     }
-  },
+  },  
   "permissions": [
     "activeTab",
     "tabs",
-    "storage",
-    "notifications"
+    "storage"
   ],
   "background": {
     "service_worker": "background.js"
