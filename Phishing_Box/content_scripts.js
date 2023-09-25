@@ -18,7 +18,7 @@ chrome.runtime.sendMessage({ action: 'checkURL', url: currentURL }, function(res
 
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
   if (message.action === 'checkURL') {
-    fetch('http://example.com/check', {  
+    fetch('http://15.164.49.80:8000/predict', {  
       method: 'POST',
       body: JSON.stringify({ url: message.url }),
       headers: {

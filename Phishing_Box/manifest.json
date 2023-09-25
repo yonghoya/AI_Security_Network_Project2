@@ -9,7 +9,7 @@
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
-       "16": "phishing_box.png",
+      "16": "phishing_box.png",
       "48": "phishing_box.png",
       "128": "phishing_box.png"
     },
