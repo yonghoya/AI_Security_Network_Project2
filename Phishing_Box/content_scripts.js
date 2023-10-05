@@ -16,7 +16,7 @@ function createDraggableCard(backgroundColor, text) {
   cardDiv.style.overflow = 'hidden';
   cardDiv.style.textOverflow = 'ellipsis';
   cardDiv.style.whiteSpace = 'nowrap';
-  cardDiv.style.cursor = 'grab';
+    cardDiv.style.cursor = 'grab';
 
   const cardText = document.createElement('div');
   cardText.textContent = text;
@@ -25,6 +25,19 @@ function createDraggableCard(backgroundColor, text) {
 
   let isDragging = false;
   let offsetX, offsetY;
+
+    const hovered = document.createElement('div');
+    hovered.innerHTML = '<p> This appears on HOVER </p>';
+    hovered.style.position = 'relative';
+    hovered.style.top = '100%';
+    hovered.style.left = '0%';
+    hovered.style.padding = '10px';
+    hovered.style.borderRadius = '5px';
+    hovered.style.backgroundColor = '#333';
+    hovered.style.color = '#ffffff';
+    hovered.style.zIndex = '9999';
+    hovered.style.display = 'none';
+    cardDiv.appendChild(hovered);
 
   cardDiv.addEventListener('mousedown', (e) => {
     isDragging = true;
@@ -44,9 +57,16 @@ function createDraggableCard(backgroundColor, text) {
     cardDiv.style.left = newX + 'px';
   });
 
+    cardDiv.addEventListener('mouseover', function () {
+        hovered.style.display = 'block';
+    });
+    cardDiv.addEventListener('mouseleave', function () {
+        hovered.style.display = 'none';
+    })
   document.addEventListener('mouseup', () => {
     isDragging = false;
-    cardDiv.style.cursor = 'grab';
+      cardDiv.style.cursor = 'grab';
+      hovered.style.display = 'block';
   });
 
   return cardDiv;
@@ -67,7 +87,7 @@ function createDraggableCard(backgroundColor, text) {
       document.body.appendChild(errorDiv);
       break;
     default:
-      const blockedDiv = createDraggableCard('red', `${response.results}: ${detailURL}`);
+      const blockedDiv = createDraggableCard('red', `${response.results}`);
       document.body.appendChild(blockedDiv);
       break;
   }
