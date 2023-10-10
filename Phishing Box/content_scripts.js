@@ -194,15 +194,33 @@ function createDraggableCard(backgroundColor, text) {
           popoverDiv.style.color = 'white'; // 텍스트 색상
           popoverDiv.style.padding = '8px'; // 내부 여백
           popoverDiv.style.borderRadius = '5px'; // 모서리 둥글게
-      
+    
           // 제목 요소 추가
           const titleElement = document.createElement('h3');
-          titleElement.textContent = '팝오버 제목';
-          titleElement.style.textAlign = 'center'; // 제목 가운데 정렬
-      
           // 내용 요소 추가
           const contentElement = document.createElement('p');
-          contentElement.textContent = '팝오버 내용을 이곳에 추가하세요.';
+
+          // 팝오버 내용 추가
+          if(response.results === "defacement"){
+            titleElement.textContent = '변조';
+            titleElement.style.textAlign = 'center'; // 제목 가운데 정렬
+            contentElement.textContent = '* 외관 변조를 통한 악의적인 URL.';
+          }
+          else if(response.results === "phishing"){
+            titleElement.textContent = '피싱';
+            titleElement.style.textAlign = 'center'; // 제목 가운데 정렬
+            contentElement.textContent = "* 개인 정보를 탈취하기 위한 URL.";
+          }
+          else if(response.results === "malware"){
+            titleElement.textContent = '악성코드';
+            titleElement.style.textAlign = 'center'; // 제목 가운데 정렬
+            contentElement.textContent = '* 악성 코드 실행을 유도하는 URL.';
+          }
+          else{
+            titleElement.textContent = 'Unfined';
+            titleElement.style.textAlign = 'center'; // 제목 가운데 정렬
+            contentElement.textContent = '* URL 결과를 확인할 수 없습니다.';
+          }
       
           // 제목과 내용 요소를 팝오버에 추가
           popoverDiv.appendChild(titleElement);
