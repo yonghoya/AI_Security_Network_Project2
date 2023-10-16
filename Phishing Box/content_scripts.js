@@ -1,7 +1,7 @@
 // 컨텐츠 스크립트 (content.js)
 
 // 세부 URL을 가져옴
-const detailURL = window.location.href;
+const detailURL = window.location.href.replace(/\/$/, '');
 let cardDiv;
 let isDragging = false;
 let isPopoverVisible = false;
@@ -78,7 +78,7 @@ function createDraggableCard(backgroundColor, text) {
 
 (async () => {
   const response = await chrome.runtime.sendMessage({ action: 'checkURL', url: detailURL, rootURL: window.location.host });
-  console.log(window.location.host);
+  console.log(detailURL);
   console.log(response);
   switch (response.results) {
     case "benign":

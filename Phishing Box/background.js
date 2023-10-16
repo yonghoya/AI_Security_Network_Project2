@@ -27,7 +27,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
           .then(setTimeout(()=> chrome.notifications.clear("phishingbox_noti"), 1500))
           sendResponse({results: result});
       }else{
-        if (urlToCheck.length > 63) {
+        if (urlToCheck.length > 100) {
           requestBody = JSON.stringify({ url: rooturl });
         } else {
           requestBody = JSON.stringify({ url: urlToCheck });
@@ -36,7 +36,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         // Django 웹 애플리케이션에 데이터 전송
         fetch('https://phishbox.site/api/endpoint', {
           method: 'POST',
-          body: JSON.stringify({url:urlToCheck}),
+          body: requestBody,
           headers: {
             'Content-Type': 'application/json',
             Accept: 'application / json',
@@ -61,7 +61,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     })
       .catch((error) => {sendResponse({results: error.message});});
     // 응답을 보냄
-    setTimeout(() => sendResponse({ shite: "q123" }), 500);
+    setTimeout(() => sendResponse({results: "SERVER ERROR"}), 500);
   };
   return true;
 });
